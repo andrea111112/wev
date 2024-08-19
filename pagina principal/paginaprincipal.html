@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinosaurio en Movimiento</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js'></script>
+    
+
+</head>
+<body>
+    <nav class="menu-principal">
+        <div class="menu-container">
+            
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nuestra-historia">Historia</a></li>
+                <li><a href="#galeria-de-amor">Álbum de Amor</a></li>
+                <li><a href="#nuestro-rincon">Rincón</a></li>
+                <li><a href="#versiculos-biblicos">Versículo</a></li>
+                <li><a href="#calendario">Calendario</a></li>
+                <li><a href="../fecha/fecha.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <style>
+        .menu-principal {
+            background: linear-gradient(45deg, #f3cdf5, #d65aa7);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-texto {
+            font-size: 1.8em;
+            color: #ecf0f1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0;
+        }
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-icon span {
+            width: 30px;
+            height: 3px;
+            background-color: #ecf0f1;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+        #menu {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #menu li {
+            margin: 0 10px;
+            position: relative;
+        }
+        #menu li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 25px;
+            background-color: rgba(236,240,241,0.1);
+        }
+        #menu li a:hover {
+            background-color: rgba(236,240,241,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #menu li a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        #menu li a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+        body {
+            padding-top: 70px;
+            background: linear-gradient(135deg, #f981fd, #f7d3f4);
+            min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: flex;
+            }
+            #menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(45deg, #8e44ad, #3498db);
+                padding: 20px 0;
+            }
+            #menu.active {
+                display: flex;
+            }
+            #menu li {
+                margin: 10px 0;
+            }
+            #menu li a {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+
+    <section id="inicio" class="inicio-container">
+        <div class="imagen-destacada">
+            <img src="../imagenes/imagen1.jpeg" alt="Imagen destacada" class="imagen-aniversario">
+        </div>
+        <div class="contenido-inicio">
+            <h1 class="titulo-aniversario">Nuestro primer año de aniversario</h1>
+            <p class="mensaje-aniversario">
+                Espero que esta página sea de tu agrado. La página será actualizada cada vez que cumplamos nuestro aniversario. Sabes, a mí no me gustan las manualidades, por eso hago lo que me gusta más: una página web que durará hasta el final. Así, cuando estemos ancianos, podremos recordar cada momento que vivimos y mostrar a nuestros futuros nietos nuestro amor. Además, cuando discutimos, recordaremos que lo que nos une es un lazo muy fuerte.
+            </p>
+        </div>
+    </section>
+
+    <style>
+        .inicio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ffe6e6, #ffb3ba);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
+        }
+
+        .imagen-destacada {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .imagen-aniversario {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-aniversario:hover {
+            transform: scale(1.05);
+        }
+
+        .contenido-inicio {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .titulo-aniversario {
+            font-size: 2.5rem;
+            color: #ff1493;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .mensaje-aniversario {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #8b0000;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(255, 105, 180, 0.1);
+        }
+    </style>
+
+    <section id="nuestra-historia">
+        <h2>Nuestra Historia de Amor</h2>
+        <div class="linea-tiempo">
+            <div class="evento">
+                <div class="icono">💖</div>
+                <div class="contenido">
+                    <h3>Día del Desfile</h3>
+                    <p>Te encontré perdida y te ofrecí ayuda. Fue el comienzo de todo.</p>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="icono">🎭</div>
+                <div class="contenido">
+                    <h3>Primeros Momentos</h3>
+                    <p>Compartimos dulces instantes y fingimos ser novios por diversión.</p>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="icono">🌟</div>
+                <div class="contenido">
+                    <h3>Descubrimiento</h3>
+                    <p>Me enamoré profundamente, sin saber que tú ya sentías algo por mí.</p>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="icono">💬</div>
+                <div class="contenido">
+                    <h3>Conversaciones Reveladoras</h3>
+                    <p>Hablamos sobre relaciones, sin darnos cuenta de lo que estaba surgiendo entre nosotros.</p>
+                </div>
+            </div>
+            <div class="evento">
+                <div class="icono">🎉</div>
+                <div class="contenido">
+                    <h3>Un Año Después</h3>
+                    <p>He ganado confianza. Juntos hemos superado momentos difíciles y seguimos creciendo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="corazon-animado">❤️</div>
+    </section>
+    <style>
+        #nuestra-historia {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border-radius: 50px;
+            padding: 60px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        #nuestra-historia::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: brilloRotativo 20s linear infinite;
+        }
+        @keyframes brilloRotativo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #nuestra-historia h2 {
+            color: #ff1493;
+            text-align: center;
+            font-size: 4em;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.6);
+            font-family: 'Dancing Script', cursive;
+        }
+        .linea-tiempo {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .evento {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            width: 100%;
+            position: relative;
+        }
+        .evento:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        .icono {
+            font-size: 2.5em;
+            background-color: #ff69b4;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            z-index: 2;
+        }
+        .contenido {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3);
+            width: calc(100% - 100px);
+            margin: 0 20px;
+        }
+        .contenido h3 {
+            color: #ff1493;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .contenido p {
+            color: #8b0000;
+            line-height: 1.8;
+        }
+        .corazon-animado {
+            font-size: 6em;
+            text-align: center;
+            animation: latidoComplejo 3s infinite;
+            margin-top: 50px;
+        }
+        @keyframes latidoComplejo {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            10% { transform: scale(1.2) rotate(-5deg); }
+            20% { transform: scale(0.9) rotate(5deg); }
+            30% { transform: scale(1.3) rotate(-10deg); }
+            40% { transform: scale(0.95) rotate(10deg); }
+            50% { transform: scale(1.2) rotate(-5deg); }
+            60% { transform: scale(1) rotate(5deg); }
+            70% { transform: scale(1.1) rotate(-10deg); }
+            80% { transform: scale(0.95) rotate(10deg); }
+            90% { transform: scale(1.05) rotate(0deg); }
+        }
+    </style>
+
+    <section id="galeria-de-amor" class="galeria-slider-magica">
+        <h2 class="titulo-galeria">Nuestro Álbum Mágico de Amor</h2>
+        <div class="contenedor-galeria">
+            <div class="slider-principal">
+                <div class="slide activo">
+                    <img src="../imagenes/imagen1.jpeg" alt="Nuestro primer encuentro">
+                    <div class="descripcion">Aquí comenzó nuestra historia</div>
+                </div>
+                <div class="slide">
+                    <img src="../imagenes/imagen2.jpeg" alt="Nuestra primera cita">
+                    <div class="descripcion">El día que me enamoré más de ti</div>
+                </div>
+                <div class="slide">
+                    <img src="../imagenes/imagen3.jpeg" alt="Nuestro primer beso">
+                    <div class="descripcion">El momento más dulce</div>
+                </div>
+                <div class="slide">
+                    <img src="../imagenes/imagen4.jpeg" alt="Nuestra primera aventura">
+                    <div class="descripcion">Explorando el mundo juntos</div>
+                </div>
+                <div class="slide">
+                    <img src="../imagenes/imagen5.jpeg" alt="Nuestro primer viaje">
+                    <div class="descripcion">Creando recuerdos inolvidables</div>
+                </div>
+            </div>
+            <div class="controles-slider">
+                <button class="prev">❮</button>
+                <button class="next">❯</button>
+            </div>
+        </div>
+        <div class="miniaturas-galeria">
+            <img src="../imagenes/imagen1.jpeg" alt="Miniatura 1" class="miniatura activa">
+            <img src="../imagenes/imagen2.jpeg" alt="Miniatura 2" class="miniatura">
+            <img src="../imagenes/imagen3.jpeg" alt="Miniatura 3" class="miniatura">
+            <img src="../imagenes/imagen4.jpeg" alt="Miniatura 4" class="miniatura">
+            <img src="../imagenes/imagen5.jpeg" alt="Miniatura 5" class="miniatura">
+            <img src="../imagenes/imagen6.jpeg" alt="Miniatura 6" class="miniatura">
+            <img src="../imagenes/imagen7.jpeg" alt="Miniatura 7" class="miniatura">
+            <img src="../imagenes/imagen8.jpeg" alt="Miniatura 8" class="miniatura">
+            <img src="../imagenes/imagen9.jpeg" alt="Miniatura 9" class="miniatura">
+            <img src="../imagenes/imagen10.jpeg" alt="Miniatura 10" class="miniatura">
+        </div>
+        <div id="reproductor-musica" class="reproductor-musica">
+            <audio id="cancion" src="../MUSICA/Ghost - Mary On A Cross.mp3"></audio>
+            <button id="play-pause" class="boton-musica">🎵</button>
+        </div>
+    </section>
+
+    <style>
+        .galeria-slider-magica {
+            background: linear-gradient(135deg, #ffd1dc, #e6f3ff);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .titulo-galeria {
+            font-family: 'Lobster', cursive;
+            color: #ff69b4;
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .contenedor-galeria {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .slider-principal {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .descripcion {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            color: #ff69b4;
+            padding: 1rem;
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.2rem;
+        }
+
+        .controles-slider {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .controles-slider button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #ff69b4;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .controles-slider button:hover {
+            background: rgba(255, 105, 180, 0.7);
+            color: white;
+        }
+
+        .miniaturas-galeria {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .miniatura {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin: 0.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .miniatura:hover, .miniatura.activa {
+            border-color: #ff69b4;
+            transform: scale(1.1);
+        }
+
+        .reproductor-musica {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .boton-musica {
+            background: none;
+            border: none;
+            color: #ff69b4;
+            font-size: 2em;
+            cursor: pointer;
+            outline: none;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .slide img {
+            animation: flotar 5s ease-in-out infinite;
+        }
+    </style>
+
+    <script>
+        const sliderPrincipal = document.querySelector('.slider-principal');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const miniaturas = document.querySelectorAll('.miniatura');
+        const audioPlayer = document.getElementById('cancion');
+        const playPauseBtn = document.getElementById('play-pause');
+        let currentSlide = 0;
+        let isPlaying = false;
+
+        function showSlide(n) {
+            sliderPrincipal.style.transform = `translateX(-${n * 100}%)`;
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('activo', index === n);
+            });
+            miniaturas.forEach((miniatura, index) => {
+                miniatura.classList.toggle('activa', index === n);
+            });
+            currentSlide = n;
+        }
+
+        function nextSlide() {
+            showSlide((currentSlide + 1) % slides.length);
+        }
+
+        function prevSlide() {
+            showSlide((currentSlide - 1 + slides.length) % slides.length);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        miniaturas.forEach((miniatura, index) => {
+            miniatura.addEventListener('click', () => showSlide(index));
+        });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '🎵';
+            } else {
+                audioPlayer.play();
+                playPauseBtn.textContent = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Cambio automático de diapositivas
+        setInterval(nextSlide, 5000);
+
+        // Efecto de partículas de corazón
+        function crearCorazon(x, y) {
+            const corazon = document.createElement('div');
+            corazon.innerHTML = '❤️';
+            corazon.className = 'corazon-flotante';
+            corazon.style.left = x + 'px';
+            corazon.style.top = y + 'px';
+            document.body.appendChild(corazon);
+
+            anime({
+                targets: corazon,
+                translateY: -100,
+                opacity: 0,
+                duration: 1500,
+                easing: 'easeOutExpo',
+                complete: function() {
+                    corazon.remove();
+                }
+            });
+        }
+
+        sliderPrincipal.addEventListener('click', (e) => {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    crearCorazon(e.clientX + (Math.random() - 0.5) * 50, e.clientY + (Math.random() - 0.5) * 50);
+                }, i * 100);
+            }
+        });
+    </script>
+      
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-image" src="" alt="">
+        </div>
+    </div>
+    <section id="nuestro-rincon">
+        <h2>Nuestro Rincón Especial</h2>
+        <div class="libro-de-amor">
+            <div class="pagina izquierda">
+                <div class="mensaje">
+                    <p class="mensaje-texto">Cada noche, encuentro a una persona más feliz. <span class="corazon">❤️</span></p>
+                </div>
+            </div>
+            <div class="pagina derecha">
+                <div class="mensaje">
+                    <p class="mensaje-texto">Cada día contigo es una nueva aventura. <span class="corazon">❤️</span></p>
+                </div>
+            </div>
+            <div class="pagina izquierda">
+                <div class="mensaje">
+                    <p class="mensaje-texto">Tu sonrisa ilumina mi mundo. <span class="corazon">❤️</span></p>
+                </div>
+            </div>
+            <div class="pagina derecha">
+                <div class="mensaje">
+                    <p class="mensaje-texto">Juntos, todo es posible. <span class="corazon">❤️</span></p>
+                </div>
+            </div>
+        </div>
+        <style>
+            #nuestro-rincon {
+                background: url('ruta/a/tu/imagen-de-fondo.jpg') no-repeat center center;
+                background-size: cover;
+                padding: 50px 0;
+            }
+            h2 {
+                text-align: center;
+                color: #ff69b4;
+                font-family: 'Brush Script MT', cursive;
+                font-size: 3em;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            .libro-de-amor {
+                width: 80%;
+                max-width: 800px;
+                margin: 0 auto;
+                perspective: 1000px;
+            }
+            .pagina {
+                background-color: rgba(255,255,255,0.9);
+                border-radius: 0 15px 15px 0;
+                box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                padding: 20px;
+                margin: 20px 0;
+                transform-style: preserve-3d;
+                transition: transform 0.6s;
+            }
+            .pagina:hover {
+                transform: rotateY(-10deg);
+            }
+            .izquierda {
+                transform-origin: left center;
+            }
+            .derecha {
+                transform-origin: right center;
+            }
+            .mensaje {
+                border: 2px solid #ff69b4;
+                border-radius: 10px;
+                padding: 15px;
+                background: linear-gradient(45deg, #ffe6f2, #fff0f5);
+            }
+            .mensaje-texto {
+                font-family: 'Comic Sans MS', cursive;
+                color: #333;
+                font-size: 18px;
+                line-height: 1.5;
+                text-align: center;
+            }
+            .corazon {
+                color: #ff1493;
+                font-size: 24px;
+                animation: latido 1s infinite;
+            }
+            @keyframes latido {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+            }
+        </style>
+    </section>
+<section id="versiculos-biblicos" class="versiculos-romanticos">
+    <h2>Versículos Bíblicos de Amor</h2>
+    <div class="pergamino">
+        <div class="verso">
+            <p class="texto-verso">"Yo soy de mi amado, y mi amado es mío."</p>
+            <p class="referencia">- Cantar de los Cantares 6:3</p>
+        </div>
+        <div class="verso">
+            <p class="texto-verso">"El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso."</p>
+            <p class="referencia">- 1 Corintios 13:4</p>
+        </div>
+        <div class="verso">
+            <p class="texto-verso">"Sobre todo, ámense los unos a los otros profundamente, porque el amor cubre multitud de pecados."</p>
+            <p class="referencia">- 1 Pedro 4:8</p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .versiculos-romanticos {
+        background: url('ruta/a/tu/imagen-de-fondo-romantica.jpg') no-repeat center center;
+        background-size: cover;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .versiculos-romanticos::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 182, 193, 0.3);
+        z-index: 1;
+    }
+    .versiculos-romanticos h2 {
+        font-family: 'Tangerine', cursive;
+        color: #8B0000;
+        font-size: 4em;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 2;
+    }
+    .pergamino {
+        background: url('ruta/a/tu/imagen-pergamino.png') no-repeat center center;
+        background-size: contain;
+        padding: 60px;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        transform: rotate(-2deg);
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .verso {
+        margin-bottom: 40px;
+        transition: all 0.3s ease;
+    }
+    .verso:hover {
+        transform: scale(1.05);
+    }
+    .texto-verso {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.4em;
+        color: #4A0E0E;
+        line-height: 1.6;
+    }
+    .referencia {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9em;
+        color: #8B4513;
+        margin-top: 10px;
+    }
+    @keyframes flotar {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    .verso {
+        animation: flotar 4s ease-in-out infinite;
+    }
+</style>
+    <section id="calendario">
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendario');
+            var today = new Date();
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                initialDate: today,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+                locale: 'es',
+                height: 600,
+                width: 450,
+                dayCellDidMount: function(info) {
+                    if (info.date.getDate() === 2) {
+                        info.el.style.backgroundColor = '#ffd1dc';
+                        var celebrarEl = document.createElement('div');
+                        celebrarEl.innerHTML = '¡Mes-versario!';
+                        celebrarEl.className = 'celebrar-mes';
+                        info.el.appendChild(celebrarEl);
+                    }
+                },
+                events: [
+                    {
+                        title: '¡Nuestro día especial!',
+                        startRecur: today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-02',
+                        endRecur: today.getFullYear() + 1 + '-01-01',
+                        startTime: '00:00',
+                        display: 'background',
+                        backgroundColor: '#ffa07a',
+                        borderColor: '#ffa07a'
+                    }
+                ],
+                eventContent: function(arg) {
+                    return {
+                        html: '<div class="fc-content"><span class="fc-title">' + arg.event.title + '</span><span class="corazon"></span></div>'
+                    };
+                },
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            });
+            calendar.render();
+        });
+    </script>
+    
+    <style>
+        #calendario {
+            width: 450px;
+            height: 600px;
+            margin: 30px auto;
+            padding: 15px;
+            background-color: #fffaf0;
+            border-radius: 25px;
+            box-shadow: 0 8px 15px rgba(255, 160, 122, 0.4);
+            transform: rotate(2deg);
+        }
+
+        .fc-daygrid-day {
+            padding: 3px;
+            border: 1px solid #ffdab9;
+        }
+
+        .fc-daygrid-day-number {
+            font-size: 0.8em;
+            color: #ff6347;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .fc-daygrid-day-top {
+            font-size: 0.8em;
+        }
+
+        .fc-event {
+            border: none !important;
+            padding: 2px 4px;
+            border-radius: 15px;
+            font-family: 'Amatic SC', cursive;
+            font-size: 14px;
+            background-color: #ffa07a !important;
+            color: #8b4513 !important;
+            transform: rotate(-2deg);
+        }
+
+        .fc-event .fc-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fc-event .corazon::before {
+            content: '❤';
+            color: #ff4500;
+            margin-left: 5px;
+            font-size: 1.2em;
+            animation: latido 1s infinite;
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .celebrar-mes {
+            font-size: 9px;
+            color: #ff6347;
+            text-align: center;
+            margin-top: 2px;
+            font-weight: bold;
+            font-family: 'Caveat', cursive;
+            transform: rotate(-5deg);
+        }
+
+        .fc-toolbar-title {
+            color: #ff7f50 !important;
+            font-family: 'Lobster', cursive;
+            font-size: 1.8em !important;
+            text-shadow: 2px 2px 4px rgba(255, 127, 80, 0.3);
+        }
+
+        .fc-button-primary {
+            background-color: #ffa07a !important;
+            border-color: #ffa07a !important;
+            font-family: 'Quicksand', sans-serif;
+            border-radius: 20px !important;
+            transition: all 0.3s ease;
+        }
+
+        .fc-button-primary:hover {
+            background-color: #ff7f50 !important;
+            border-color: #ff7f50 !important;
+            transform: scale(1.05);
+        }
+
+        .fc-day-today {
+            background-color: #fff5ee !important;
+            border: 2px solid #ffa07a !important;
+        }
+
+        @media (max-width: 600px) {
+            #calendario {
+                width: 90%;
+                height: auto;
+            }
+        }
+    </style>
+
+</section>
+
+
+
+
+
+    <!-- FullCalendar JS y Moment.js (necesario para FullCalendar) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+
+    <script src="java.js"></script>
+</body>
+</html>

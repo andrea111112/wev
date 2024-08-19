@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: #ffe6e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .escena {
+        text-align: center;
+        position: relative;
+        width: 300px;
+        height: 200px;
+    }
+
+    .dinosaurio {
+        font-size: 80px;
+        position: absolute;
+        transition: all 2s ease-in-out;
+    }
+
+    #dino1 {
+        left: -100px;
+    }
+
+    #dino2 {
+        right: -100px;
+    }
+
+    .corazon {
+        color: #ff1493;
+        font-size: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: all 1s ease-in-out;
+    }
+
+    .mensaje {
+        font-size: 24px;
+        color: #ff69b4;
+        margin-top: 180px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+</style>
+
+<div class="escena">
+    <div id="dino1" class="dinosaurio">🦕</div>
+    <div id="dino2" class="dinosaurio">🦖</div>
+    <div id="corazon" class="corazon">❤</div>
+    <div id="mensaje" class="mensaje">¡Nuestro amor es prehistórico!</div>
+</div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById('dino1').style.left = '60px';
+        document.getElementById('dino2').style.right = '60px';
+    }, 1000);
+
+    setTimeout(() => {
+        document.getElementById('corazon').style.opacity = '1';
+    }, 3000);
+
+    setTimeout(() => {
+        document.getElementById('corazon').style.left = 'calc(100% - 100px)';
+    }, 4000);
+
+    setTimeout(() => {
+        document.getElementById('corazon').style.opacity = '0';
+        document.getElementById('mensaje').style.opacity = '1';
+    }, 5000);
+
+    setTimeout(() => {
+        window.location.href = "../pagina principal/paginaprincipal.html";
+    }, 7000);
+</script>
+</body>
+</html>
